@@ -28,8 +28,8 @@ export default function Header() {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? "bg-cream/95 backdrop-blur-md shadow-md border-b border-deep-teal/10" 
+        isScrolled || isMenuOpen
+          ? "bg-cream shadow-md border-b border-deep-teal/10" 
           : "bg-cream/90 backdrop-blur-sm"
       }`}
     >
@@ -104,44 +104,48 @@ export default function Header() {
 
         {/* Mobile Navigation Drawer */}
         {isMenuOpen && (
-          <div className={`lg:hidden fixed inset-0 top-16 z-40 transition-all duration-300 ${
-            isScrolled 
-              ? "bg-cream/98 backdrop-blur-md" 
-              : "bg-cream/95 backdrop-blur-sm"
-          }`}>
-            <div className="container-custom py-6">
-              <div className="flex flex-col space-y-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="text-navy-blue hover:text-deep-teal font-semibold text-lg transition-colors duration-300 py-2 border-b border-deep-teal/10 hover:border-deep-teal/30"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                {session ? (
-                  <Link
-                    href="/volunteer/dashboard"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="px-5 py-2.5 rounded-lg bg-deep-teal text-white font-semibold text-center transition-all duration-300 hover:bg-teal-700 hover:shadow-md mt-2 flex items-center justify-center space-x-2"
-                  >
-                    <LayoutDashboard className="w-4 h-4" />
-                    <span>Dashboard</span>
-                  </Link>
-                ) : (
-                  <Link
-                    href="/volunteer/login"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="px-5 py-2.5 rounded-lg border-2 border-deep-teal text-deep-teal font-semibold text-center transition-all duration-300 hover:bg-deep-teal hover:text-white hover:shadow-md mt-2"
-                  >
-                    Volunteer Login
-                  </Link>
-                )}
+          <>
+            {/* Backdrop overlay */}
+            <div 
+              className="lg:hidden fixed inset-0 bg-black/50 z-30"
+              onClick={() => setIsMenuOpen(false)}
+            />
+            {/* Menu drawer */}
+            <div className="lg:hidden fixed inset-0 top-16 z-40 transition-all duration-300 bg-cream">
+              <div className="container-custom py-6">
+                <div className="flex flex-col space-y-4">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="text-navy-blue hover:text-deep-teal font-semibold text-lg transition-colors duration-300 py-2 border-b border-deep-teal/10 hover:border-deep-teal/30"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                  {session ? (
+                    <Link
+                      href="/volunteer/dashboard"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="px-5 py-2.5 rounded-lg bg-deep-teal text-white font-semibold text-center transition-all duration-300 hover:bg-teal-700 hover:shadow-md mt-2 flex items-center justify-center space-x-2"
+                    >
+                      <LayoutDashboard className="w-4 h-4" />
+                      <span>Dashboard</span>
+                    </Link>
+                  ) : (
+                    <Link
+                      href="/volunteer/login"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="px-5 py-2.5 rounded-lg border-2 border-deep-teal text-deep-teal font-semibold text-center transition-all duration-300 hover:bg-deep-teal hover:text-white hover:shadow-md mt-2"
+                    >
+                      Volunteer Login
+                    </Link>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          </>
         )}
       </nav>
     </header>

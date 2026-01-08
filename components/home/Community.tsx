@@ -55,8 +55,8 @@ export default function Community() {
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
                     style={{ backgroundImage: `url(${program.image})` }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-800/85 to-slate-800/60" />
-                  <div className="absolute inset-0 bg-black/30" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-800/50 to-slate-800/40" />
+                  <div className="absolute inset-0 bg-black/15" />
                   <div className="absolute top-4 left-4 z-10">
                     <div className="w-12 h-12 bg-rich-gold backdrop-blur-sm rounded-lg flex items-center justify-center shadow-xl border border-white/20">
                       <Icon className="w-6 h-6 text-white" />
