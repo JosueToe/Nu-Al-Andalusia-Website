@@ -19,9 +19,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Nu Al Andalusia - Honoring Heritage, Building Community",
-  description: "Connecting communities through innovative services rooted in the rich legacy of the Moorish Empire and Al-Andalusia. Together, we build stronger communities in memory of our ancestors.",
-  keywords: ["Moorish Empire", "Al-Andalusia", "community services", "government services", "heritage", "cultural preservation"],
+  title: "Nu Al Andalusia - Provincial Government of the Moroccan Empire",
+  description: "Nu Al Andalusia is the Provincial Government of the Moroccan Empire operating within the corporate jurisdiction commonly known as the State of Florida. Lawfully continued under international law, treaty recognition, and the doctrine of uti possidetis juris.",
+  keywords: ["Moroccan Empire", "Nu Al Andalusia", "Provincial Government", "Morocco", "Consular Courts", "Moorish", "international law", "treaty"],
   authors: [{ name: "Nu Al Andalusia" }],
   creator: "Nu Al Andalusia",
   publisher: "Nu Al Andalusia",
@@ -29,9 +29,29 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      {
+        rel: "android-chrome-192x192",
+        url: "/android-chrome-192x192.png",
+      },
+      {
+        rel: "android-chrome-512x512",
+        url: "/android-chrome-512x512.png",
+      },
+    ],
+  },
   openGraph: {
-    title: "Nu Al Andalusia - Honoring Heritage, Building Community",
-    description: "Connecting communities through innovative services rooted in the rich legacy of the Moorish Empire and Al-Andalusia.",
+    title: "Nu Al Andalusia - Provincial Government of the Moroccan Empire",
+    description: "Lawfully continued under international law, treaty recognition, and the doctrine of uti possidetis juris.",
     type: "website",
     locale: "en_US",
     siteName: "Nu Al Andalusia",
@@ -39,8 +59,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nu Al Andalusia - Honoring Heritage, Building Community",
-    description: "Connecting communities through innovative services rooted in the rich legacy of the Moorish Empire and Al-Andalusia.",
+    title: "Nu Al Andalusia - Provincial Government of the Moroccan Empire",
+    description: "Lawfully continued under international law, treaty recognition, and the doctrine of uti possidetis juris.",
   },
   robots: {
     index: true,

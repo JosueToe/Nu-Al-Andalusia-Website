@@ -35,13 +35,28 @@ export default function Header() {
     >
       <nav className="container-custom">
         <div className="flex items-center justify-between h-16 relative">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group z-10">
-            <Star className="w-7 h-7 text-rich-gold group-hover:text-deep-teal transition-colors duration-300" fill="currentColor" />
-            <span className="font-heading text-xl font-bold text-navy-blue group-hover:text-deep-teal transition-colors duration-300">
-              Nu Al Andalusia
-            </span>
-          </Link>
+              {/* Logo */}
+              <Link href="/" className="flex items-center space-x-2 group z-10">
+                <div className="relative w-10 h-10 flex-shrink-0">
+                  <img
+                    src="/seal.png"
+                    alt="Nu Al Andalusia Seal"
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      // Fallback to star icon if seal not found
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent) {
+                        parent.innerHTML = '<svg class="w-10 h-10 text-rich-gold group-hover:text-deep-teal transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+                      }
+                    }}
+                  />
+                </div>
+                <span className="font-heading text-xl font-bold text-navy-blue group-hover:text-deep-teal transition-colors duration-300">
+                  Nu Al Andalusia
+                </span>
+              </Link>
 
           {/* Desktop Navigation - Centered */}
           <div className="hidden lg:flex items-center space-x-10 absolute left-1/2 transform -translate-x-1/2">

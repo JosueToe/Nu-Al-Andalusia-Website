@@ -44,9 +44,9 @@ export default function AboutUs() {
           <p className="text-rich-gold font-semibold uppercase tracking-wide mb-2">
             About Us
           </p>
-          <h2 className="text-h2 mb-6 heading-underline">Our Story</h2>
+          <h2 className="text-h2 mb-6 heading-underline">About Nu Al Andalusia</h2>
           <p className="text-xl text-warm-gray max-w-3xl mx-auto">
-            Connecting Cultures, Honoring Heritage, Building Community
+            The Provincial Government of the Moroccan Empire
           </p>
         </div>
 
@@ -54,13 +54,13 @@ export default function AboutUs() {
           <div>
             <div className="prose prose-lg max-w-none space-y-4">
               <p className="text-body">
-                Nu Al Andalusia was founded with a profound commitment to preserving and celebrating the rich cultural heritage of the Moorish Empire and Al-Andalusia while providing innovative services that strengthen our community.
+                Nu Al Andalusia is the modern provincial expression of the historical Moroccan Empire, lawfully continued under international law and recognized treaty frameworks. Our position is grounded in the doctrine of uti possidetis juris, which preserves pre-existing sovereign boundaries and rights despite later colonial or administrative alterations. Accordingly, Nu Al Andalusia functions as the Provincial Government of the Moroccan Empire within the territory now administratively identified as the State of Florida.
               </p>
               <p className="text-body">
-                The legacy of Al-Andalusia represents a golden age of cultural exchange, scientific advancement, and harmonious coexistence. We draw inspiration from this remarkable period to guide our work today.
+                While Nu Al Andalusia shares geographic jurisdiction with the State of Florida, it maintains a superior and antecedent legal standing derived from Morocco&apos;s continuous treaty recognition and sovereign character. Our nationals have lawfully returned to Moroccan jurisdiction through full submission to the Moslem Law of the Empire of Morocco, in accordance with Article 15 of the Treaty of Madrid of 1880.
               </p>
               <p className="text-body">
-                Our organization serves as a bridge between our rich historical heritage and contemporary community needs. Every program we develop, every service we provide, and every relationship we cultivate is rooted in the values of our ancestors: excellence, integrity, collaboration, and cultural pride.
+                The foundation of our authority is further affirmed by a continuous body of international instruments, including the Moroccan–American Treaties of Peace and Friendship of 1786 and 1836, the Moroccan–Anglo Treaty of 1856 and its Most Favored Nation Clause, the Act of Algeciras of 1906, the Treaty of Fez of 1912, and the Franco–Moroccan Agreement of 1956.
               </p>
             </div>
           </div>

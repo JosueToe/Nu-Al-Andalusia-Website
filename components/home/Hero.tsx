@@ -13,10 +13,17 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-800/80 to-slate-900/95 z-10" />
-        <div className="absolute inset-0 bg-cover bg-center" style={{
-          backgroundImage: `url(https://img1.wsimg.com/isteam/ip/affce380-83a6-45b4-b933-9ee60cca89a4/IMG_20250604_190800_122.jpg/:/rs=w:1300,h:800)`
-        }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-800/60 to-slate-900/80 z-10" />
+        <img
+          src="/state-flag.png"
+          alt="State Flag"
+          className="absolute inset-0 w-full h-full object-cover"
+          onError={(e) => {
+            // Fallback to original image if state flag not found
+            const target = e.target as HTMLImageElement;
+            target.src = "https://img1.wsimg.com/isteam/ip/affce380-83a6-45b4-b933-9ee60cca89a4/IMG_20250604_190800_122.jpg/:/rs=w:1300,h:800";
+          }}
+        />
       </div>
 
       {/* Geometric Pattern Overlay */}
@@ -28,15 +35,15 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-30 container-custom text-center text-white">
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold mb-6 text-balance drop-shadow-2xl text-white">
-          Welcome to Nu Al Andalusia
-        </h1>
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading font-semibold mb-6 text-rich-gold drop-shadow-xl">
-          Honoring Our Heritage, Building Our Future
-        </h2>
-        <p className="text-lg md:text-xl max-w-3xl mx-auto mb-10 text-white leading-relaxed drop-shadow-lg bg-black/40 px-6 py-4 rounded-xl backdrop-blur-md border border-white/10">
-          Connecting communities through innovative services rooted in the rich legacy of the Moorish Empire and Al-Andalusia. Together, we build stronger communities in memory of our ancestors.
-        </p>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold mb-6 text-balance drop-shadow-2xl text-white">
+              Nu Al Andalusia
+            </h1>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading font-semibold mb-6 text-rich-gold drop-shadow-xl">
+              Provincial Government of the Moroccan Empire
+            </h2>
+            <p className="text-lg md:text-xl max-w-3xl mx-auto mb-10 text-white leading-relaxed drop-shadow-lg bg-black/40 px-6 py-4 rounded-xl backdrop-blur-md border border-white/10">
+              Lawfully continued under international law, treaty recognition, and the doctrine of uti possidetis juris. Operating within the corporate jurisdiction known as the State of Florida, Nu Al Andalusia advances lawful governance, consular jurisdiction, and treaty-based sovereignty.
+            </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button
             onClick={() => {

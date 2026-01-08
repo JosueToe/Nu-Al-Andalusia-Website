@@ -20,23 +20,17 @@ export default function MissionStatement() {
               Our Mission
             </p>
             <h2 className="text-h2 mb-6 heading-underline">
-              Building Stronger Communities
+              Provincial Government of the Moroccan Empire
             </h2>
-            <p className="text-rich-gold text-xl font-heading mb-6">
-              In Memory of Our Ancestors
-            </p>
-            <p className="text-warm-gray italic mb-6">
-              Building Stronger Communities in memories of our ancestors. nu al andalusia
-            </p>
             <div className="space-y-4 text-body mb-8">
               <p>
-                At Nu Al Andalusia, we bridge the rich legacy of the Moorish Empire and Al-Andalusia with modern community services that honor our heritage while building a brighter future. Our mission is rooted in cultural pride, innovation, and the unwavering commitment to strengthen the bonds that unite our community.
+                Nu Al Andalusia exists to lawfully continue the restoration of the historical Moroccan Empire through the principled application of international law, treaty obligations, and the doctrine of uti possidetis juris. As the Provincial Government of the Moroccan Empire operating within the corporate jurisdiction commonly known as the State of Florida, Nu Al Andalusia is committed to the reestablishment of lawful governance, consular jurisdiction, and equitable trade consistent with Morocco&apos;s pre-existing sovereignty.
               </p>
               <p>
-                We believe that by connecting our ancestral wisdom with contemporary solutions, we can create transformative change. Every service we provide, every program we develop, and every relationship we build is a testament to the enduring spirit of our ancestors and their vision of unity, excellence, and progress.
+                Our mission is to protect the rights of Moroccan nationals, uphold the sanctity of binding international treaties, and advance a unified framework of governance rooted in Moorish identity, Moslem Law, and collective responsibility. Through reactivated Consular Courts and institutional development, we seek to restore order, accountability, and lawful commerce throughout the entire Moroccan Empire.
               </p>
-              <p>
-                Through collaboration, diversity, and dedication, we are building stronger communities that honor the past while embracing the future. Together, we create lasting positive impact that resonates across generations.
+              <p className="text-rich-gold text-lg font-heading italic">
+                Guided by the enduring truth that none of us are as powerful as all of us together.
               </p>
             </div>
 

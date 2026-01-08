@@ -13,7 +13,7 @@ export default function AboutHero() {
           About Nu Al Andalusia
         </h1>
         <p className="text-2xl md:text-3xl font-heading font-semibold text-rich-gold">
-          Connecting Cultures, Honoring Heritage, Building Community
+          Provincial Government of the Moroccan Empire
         </p>
       </div>
     </section>
