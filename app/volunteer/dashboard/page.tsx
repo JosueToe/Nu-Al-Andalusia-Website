@@ -2,14 +2,14 @@
 
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { signOut } from "next-auth/react";
 import NewsEditor from "@/components/volunteer/NewsEditor";
 import NewsList from "@/components/volunteer/NewsList";
 import { LogOut, Plus, FileText, Loader2 } from "lucide-react";
 import Link from "next/link";
 
-export default function VolunteerDashboard() {
+function DashboardContent() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -108,6 +108,18 @@ export default function VolunteerDashboard() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function VolunteerDashboard() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-cream flex items-center justify-center pt-16">
+        <Loader2 className="w-8 h-8 animate-spin text-deep-teal" />
+      </div>
+    }>
+      <DashboardContent />
+    </Suspense>
   );
 }
 
