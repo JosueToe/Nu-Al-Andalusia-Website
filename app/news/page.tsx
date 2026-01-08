@@ -40,9 +40,24 @@ export default function NewsPage() {
         
         script.onload = () => {
           console.log('Imgur embed script loaded');
+          // Wait a bit for script to initialize, then process embeds
+          setTimeout(() => {
+            const embeds = document.querySelectorAll('.imgur-embed-pub');
+            if (embeds.length > 0 && (window as any).imgurEmbed) {
+              (window as any).imgurEmbed.createIframe();
+            }
+          }, 200);
         };
         
         document.body.appendChild(script);
+      } else {
+        // Script already loaded, trigger processing
+        setTimeout(() => {
+          const embeds = document.querySelectorAll('.imgur-embed-pub');
+          if (embeds.length > 0 && (window as any).imgurEmbed) {
+            (window as any).imgurEmbed.createIframe();
+          }
+        }, 200);
       }
     }
   }, [posts]);
@@ -96,7 +111,16 @@ export default function NewsPage() {
                 {post.imageUrl && (
                   <div className="relative mb-4 rounded-lg overflow-hidden">
                     {post.imageUrl.includes('<blockquote class="imgur-embed-pub"') ? (
-                      <div className="imgur-embed-container" dangerouslySetInnerHTML={{ __html: post.imageUrl }} />
+                      <div 
+                        className="imgur-embed-container"
+                        style={{ minHeight: '200px', maxHeight: '300px', overflow: 'hidden' }}
+                        dangerouslySetInnerHTML={{ 
+                          __html: post.imageUrl.replace(
+                            /<script[^>]*>[\s\S]*?<\/script>/gi, 
+                            ''
+                          ) 
+                        }} 
+                      />
                     ) : (
                       <div className="relative h-48 bg-gray-200">
                         <img
