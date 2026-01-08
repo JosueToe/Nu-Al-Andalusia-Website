@@ -70,11 +70,19 @@ export default function NewsPage() {
                 className="card p-6 shadow-md hover:shadow-xl transition-all duration-300 group"
               >
                 {post.imageUrl && (
-                  <div className="relative h-48 mb-4 rounded-lg overflow-hidden">
+                  <div className="relative h-48 mb-4 rounded-lg overflow-hidden bg-gray-200">
                     <img
                       src={post.imageUrl}
                       alt={post.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const parent = target.parentElement;
+                        if (parent) {
+                          parent.innerHTML = '<div class="w-full h-full flex items-center justify-center text-gray-400 text-sm">Image not available</div>';
+                        }
+                      }}
                     />
                   </div>
                 )}

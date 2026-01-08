@@ -74,11 +74,19 @@ export default function NewsPostPage() {
         </Link>
 
         {post.imageUrl && (
-          <div className="relative h-96 mb-8 rounded-lg overflow-hidden">
+          <div className="relative h-96 mb-8 rounded-lg overflow-hidden bg-gray-200">
             <img
               src={post.imageUrl}
               alt={post.title}
               className="w-full h-full object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const parent = target.parentElement;
+                if (parent) {
+                  parent.innerHTML = '<div class="w-full h-full flex items-center justify-center text-gray-400">Image not available</div>';
+                }
+              }}
             />
           </div>
         )}

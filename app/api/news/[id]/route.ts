@@ -44,6 +44,21 @@ export async function PUT(
     const store = getStore(STORE_NAME);
     const body = await request.json();
     
+    // Clean and validate image URL (same logic as POST)
+    let imageUrl = (body.imageUrl || "").trim();
+    
+    // Convert Imgur gallery links to direct image links
+    if (imageUrl && imageUrl.includes("imgur.com")) {
+      if (imageUrl.includes("/a/") || imageUrl.includes("/gallery/")) {
+        console.warn("Imgur gallery link detected. Use direct image link (i.imgur.com/...) instead.");
+      } else if (!imageUrl.includes("i.imgur.com")) {
+        const match = imageUrl.match(/imgur\.com\/([a-zA-Z0-9]+)/);
+        if (match && match[1]) {
+          imageUrl = `https://i.imgur.com/${match[1]}.jpg`;
+        }
+      }
+    }
+    
     const data = await store.get("posts", { type: "json" });
     const posts = data || [];
     
@@ -55,6 +70,7 @@ export async function PUT(
     posts[index] = {
       ...posts[index],
       ...body,
+      imageUrl: imageUrl || posts[index].imageUrl || "",
       updatedAt: new Date().toISOString(),
     };
     

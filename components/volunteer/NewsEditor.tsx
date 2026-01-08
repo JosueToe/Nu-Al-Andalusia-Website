@@ -176,6 +176,9 @@ export default function NewsEditor({ post }: { post?: NewsPost }) {
             <p className="text-xs text-warm-gray mt-2">
               Paste an image URL from Imgur, Cloudinary, or any image hosting service
             </p>
+            <p className="text-xs text-amber-600 mt-1">
+              <strong>For Imgur:</strong> Use the direct image link (i.imgur.com/xxxxx.jpg) or right-click the image and select "Copy image address"
+            </p>
           </div>
 
         <div className="flex items-center space-x-2">
