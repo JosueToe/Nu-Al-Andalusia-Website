@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Calendar, User, ArrowRight, Loader2 } from "lucide-react";
 
@@ -22,6 +22,30 @@ export default function NewsPage() {
   useEffect(() => {
     fetchPosts();
   }, []);
+
+  // Load Imgur embed script when embed codes are present
+  useEffect(() => {
+    const hasEmbed = posts.some(post => 
+      post.imageUrl && post.imageUrl.includes('<blockquote class="imgur-embed-pub"')
+    );
+    
+    if (hasEmbed) {
+      const existingScript = document.querySelector('script[src="//s.imgur.com/min/embed.js"]');
+      
+      if (!existingScript) {
+        const script = document.createElement('script');
+        script.src = '//s.imgur.com/min/embed.js';
+        script.async = true;
+        script.charset = 'utf-8';
+        
+        script.onload = () => {
+          console.log('Imgur embed script loaded');
+        };
+        
+        document.body.appendChild(script);
+      }
+    }
+  }, [posts]);
 
   const fetchPosts = async () => {
     try {

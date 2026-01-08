@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { Calendar, User, ArrowLeft, Loader2 } from "lucide-react";
@@ -20,12 +20,49 @@ export default function NewsPostPage() {
   const params = useParams();
   const [post, setPost] = useState<NewsPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const embedContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (params.id) {
       fetchPost(params.id as string);
     }
   }, [params.id]);
+
+  // Load Imgur embed script when embed code is present
+  useEffect(() => {
+    if (post?.imageUrl && post.imageUrl.includes('<blockquote class="imgur-embed-pub"')) {
+      // Check if script is already loaded
+      const existingScript = document.querySelector('script[src="//s.imgur.com/min/embed.js"]');
+      
+      if (!existingScript) {
+        const script = document.createElement('script');
+        script.src = '//s.imgur.com/min/embed.js';
+        script.async = true;
+        script.charset = 'utf-8';
+        
+        script.onload = () => {
+          // Script loaded, wait a bit for it to initialize then trigger processing
+          setTimeout(() => {
+            // Imgur script should auto-process, but we can trigger it manually if needed
+            const embeds = document.querySelectorAll('.imgur-embed-pub');
+            if (embeds.length > 0 && (window as any).imgurEmbed) {
+              (window as any).imgurEmbed.createIframe();
+            }
+          }, 200);
+        };
+        
+        document.body.appendChild(script);
+      } else {
+        // Script already loaded, just wait a bit and let it process
+        setTimeout(() => {
+          const embeds = document.querySelectorAll('.imgur-embed-pub');
+          if (embeds.length > 0 && (window as any).imgurEmbed) {
+            (window as any).imgurEmbed.createIframe();
+          }
+        }, 200);
+      }
+    }
+  }, [post?.imageUrl]);
 
   const fetchPost = async (id: string) => {
     try {
@@ -76,7 +113,17 @@ export default function NewsPostPage() {
         {post.imageUrl && (
           <div className="relative mb-8 rounded-lg overflow-hidden">
             {post.imageUrl.includes('<blockquote class="imgur-embed-pub"') ? (
-              <div className="imgur-embed-container" dangerouslySetInnerHTML={{ __html: post.imageUrl }} />
+              <div 
+                ref={embedContainerRef}
+                className="imgur-embed-container"
+                style={{ minHeight: '400px' }}
+                dangerouslySetInnerHTML={{ 
+                  __html: post.imageUrl.replace(
+                    /<script[^>]*>[\s\S]*?<\/script>/gi, 
+                    ''
+                  ) 
+                }} 
+              />
             ) : (
               <div className="relative h-96 bg-gray-200">
                 <img
