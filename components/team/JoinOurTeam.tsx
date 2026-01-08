@@ -9,7 +9,7 @@ export default function JoinOurTeam() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-h2 mb-6">Join Our Team</h2>
           <p className="text-xl text-warm-gray mb-8">
-            We're always looking for passionate individuals who share our commitment to honoring heritage and building community.
+            We&apos;re always looking for passionate individuals who share our commitment to honoring heritage and building community.
           </p>
 
           <div className="card p-8 md:p-12 mb-8">
@@ -18,7 +18,7 @@ export default function JoinOurTeam() {
               <div>
                 <h4 className="text-h4 mb-3 text-deep-teal">Volunteer Opportunities</h4>
                 <p className="text-warm-gray mb-4">
-                  We welcome volunteers who want to contribute their time and skills to our mission. Whether you're interested in event planning, community outreach, or program support, there's a place for you.
+                  We welcome volunteers who want to contribute their time and skills to our mission. Whether you&apos;re interested in event planning, community outreach, or program support, there&apos;s a place for you.
                 </p>
               </div>
 
@@ -32,7 +32,7 @@ export default function JoinOurTeam() {
               <div>
                 <h4 className="text-h4 mb-3 text-deep-teal">How to Apply</h4>
                 <p className="text-warm-gray">
-                  To learn more about volunteer opportunities or open positions, please reach out through our contact form or email us directly. We'd love to hear from you!
+                  To learn more about volunteer opportunities or open positions, please reach out through our contact form or email us directly. We&apos;d love to hear from you!
                 </p>
               </div>
             </div>

@@ -163,7 +163,7 @@ export default function ContactForm() {
         {status === "success" && (
           <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-lg flex items-center space-x-2 text-emerald-700">
             <CheckCircle className="w-5 h-5" />
-            <span>Message sent successfully! We'll get back to you soon.</span>
+            <span>Message sent successfully! We&apos;ll get back to you soon.</span>
           </div>
         )}
 

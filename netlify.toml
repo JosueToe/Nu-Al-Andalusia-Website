@@ -2,13 +2,10 @@
   command = "npm run build"
   publish = ".next"
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-
 [build.environment]
   NODE_VERSION = "18"
 
-# Netlify Forms configuration
+# Next.js rewrites - handled automatically by Netlify
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/next"

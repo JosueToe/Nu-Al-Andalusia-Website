@@ -7,7 +7,7 @@ export default function OurStory() {
           
           <div className="prose prose-lg max-w-none space-y-6">
             <p className="text-xl text-deep-teal font-semibold italic text-center mb-8">
-              "Honoring our ancestors by building a future that reflects their vision of unity, excellence, and progress."
+              &quot;Honoring our ancestors by building a future that reflects their vision of unity, excellence, and progress.&quot;
             </p>
 
             <p>

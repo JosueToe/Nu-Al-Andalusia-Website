@@ -11,7 +11,7 @@ export default function TeamPhilosophy() {
             </p>
 
             <p>
-              What makes our team unique is our shared commitment to honoring our heritage while embracing innovation. Each team member brings their own expertise and perspective, but we're united by a common purpose: to serve our community with excellence and cultural pride.
+              What makes our team unique is our shared commitment to honoring our heritage while embracing innovation. Each team member brings their own expertise and perspective, but we&apos;re united by a common purpose: to serve our community with excellence and cultural pride.
             </p>
 
             <p>
@@ -19,7 +19,7 @@ export default function TeamPhilosophy() {
             </p>
 
             <p>
-              We're committed to professional development, providing opportunities for training, mentorship, and career advancement. We understand that investing in our team is investing in our mission. As our team members grow, so does our ability to serve our community effectively.
+              We&apos;re committed to professional development, providing opportunities for training, mentorship, and career advancement. We understand that investing in our team is investing in our mission. As our team members grow, so does our ability to serve our community effectively.
             </p>
 
             <p>

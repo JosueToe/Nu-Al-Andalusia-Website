@@ -95,7 +95,7 @@ export default function OurImpact() {
               <div key={index} className="card p-6 relative">
                 <Quote className="w-12 h-12 text-rich-gold/20 absolute top-4 right-4" />
                 <p className="text-warm-gray mb-4 italic leading-relaxed relative z-10">
-                  "{testimonial.quote}"
+                  &quot;{testimonial.quote}&quot;
                 </p>
                 <div className="border-t pt-4">
                   <p className="font-semibold text-navy-blue">{testimonial.author}</p>

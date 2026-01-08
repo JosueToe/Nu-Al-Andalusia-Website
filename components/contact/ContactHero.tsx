@@ -13,7 +13,7 @@ export default function ContactHero() {
           Contact Us
         </h1>
         <p className="text-2xl md:text-3xl font-heading font-semibold text-rich-gold">
-          We'd love to hear from you
+          We&apos;d love to hear from you
         </p>
       </div>
     </section>
