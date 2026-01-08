@@ -47,11 +47,19 @@ export async function PUT(
     // Clean and validate image URL (same logic as POST)
     let imageUrl = (body.imageUrl || "").trim();
     
-    // Convert Imgur gallery links to direct image links
+    // Handle Imgur URLs
     if (imageUrl && imageUrl.includes("imgur.com")) {
+      // Gallery links (imgur.com/a/...) cannot be used as image sources
       if (imageUrl.includes("/a/") || imageUrl.includes("/gallery/")) {
-        console.warn("Imgur gallery link detected. Use direct image link (i.imgur.com/...) instead.");
+        // Return error for gallery links
+        return NextResponse.json(
+          { 
+            error: "Gallery links are not supported. Please use a direct image link. Right-click the image in the gallery and select 'Copy image address' to get the direct link (i.imgur.com/xxxxx.jpg)." 
+          },
+          { status: 400 }
+        );
       } else if (!imageUrl.includes("i.imgur.com")) {
+        // Try to convert regular imgur.com/xxxxx to i.imgur.com/xxxxx.jpg
         const match = imageUrl.match(/imgur\.com\/([a-zA-Z0-9]+)/);
         if (match && match[1]) {
           imageUrl = `https://i.imgur.com/${match[1]}.jpg`;

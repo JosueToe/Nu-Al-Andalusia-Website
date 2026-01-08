@@ -75,8 +75,10 @@ export default function NewsPage() {
                       src={post.imageUrl}
                       alt={post.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      crossOrigin="anonymous"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
+                        console.error("Image failed to load:", post.imageUrl);
                         target.style.display = 'none';
                         const parent = target.parentElement;
                         if (parent) {

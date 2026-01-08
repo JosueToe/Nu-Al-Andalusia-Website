@@ -79,13 +79,23 @@ export default function NewsPostPage() {
               src={post.imageUrl}
               alt={post.title}
               className="w-full h-full object-cover"
+              crossOrigin="anonymous"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
+                console.error("Image failed to load:", post.imageUrl);
                 target.style.display = 'none';
                 const parent = target.parentElement;
                 if (parent) {
-                  parent.innerHTML = '<div class="w-full h-full flex items-center justify-center text-gray-400">Image not available</div>';
+                  parent.innerHTML = `
+                    <div class="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
+                      <p class="mb-2">Image not available</p>
+                      <p class="text-xs text-gray-500 break-all text-center">URL: ${post.imageUrl}</p>
+                    </div>
+                  `;
                 }
+              }}
+              onLoad={() => {
+                console.log("Image loaded successfully:", post.imageUrl);
               }}
             />
           </div>

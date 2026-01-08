@@ -42,16 +42,19 @@ export async function POST(request: NextRequest) {
     // Clean and validate image URL
     let imageUrl = (body.imageUrl || "").trim();
     
-    // Convert Imgur gallery links to direct image links
+    // Handle Imgur URLs
     if (imageUrl && imageUrl.includes("imgur.com")) {
-      // If it's a gallery link (imgur.com/a/... or imgur.com/gallery/...), we can't convert it
-      // But if it's a direct link (i.imgur.com/...), it should work
-      // For regular imgur.com links without /a/ or /gallery/, try to convert to direct link
+      // Gallery links (imgur.com/a/...) cannot be used as image sources
       if (imageUrl.includes("/a/") || imageUrl.includes("/gallery/")) {
-        // Gallery links need special handling - user should use direct image link
-        console.warn("Imgur gallery link detected. Use direct image link (i.imgur.com/...) instead.");
+        // Return error for gallery links
+        return NextResponse.json(
+          { 
+            error: "Gallery links are not supported. Please use a direct image link. Right-click the image in the gallery and select 'Copy image address' to get the direct link (i.imgur.com/xxxxx.jpg)." 
+          },
+          { status: 400 }
+        );
       } else if (!imageUrl.includes("i.imgur.com")) {
-        // Try to convert imgur.com/xxxxx to i.imgur.com/xxxxx.jpg
+        // Try to convert regular imgur.com/xxxxx to i.imgur.com/xxxxx.jpg
         const match = imageUrl.match(/imgur\.com\/([a-zA-Z0-9]+)/);
         if (match && match[1]) {
           imageUrl = `https://i.imgur.com/${match[1]}.jpg`;
