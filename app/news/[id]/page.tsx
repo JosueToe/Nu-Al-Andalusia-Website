@@ -111,11 +111,11 @@ export default function NewsPostPage() {
         </Link>
 
         {post.imageUrl && (
-          <div className="relative mb-8 rounded-lg overflow-hidden">
+          <div className="relative mb-8 rounded-lg overflow-hidden flex justify-center items-center">
             {post.imageUrl.includes('<blockquote class="imgur-embed-pub"') ? (
               <div 
                 ref={embedContainerRef}
-                className="imgur-embed-container"
+                className="imgur-embed-container w-full flex justify-center"
                 style={{ minHeight: '400px' }}
                 dangerouslySetInnerHTML={{ 
                   __html: post.imageUrl.replace(
@@ -125,7 +125,7 @@ export default function NewsPostPage() {
                 }} 
               />
             ) : (
-              <div className="relative h-96 bg-gray-200">
+              <div className="relative h-96 bg-gray-200 w-full flex justify-center items-center">
                 <img
                   src={post.imageUrl}
                   alt={post.title}

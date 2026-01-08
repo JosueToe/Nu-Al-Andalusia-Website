@@ -109,10 +109,10 @@ export default function NewsPage() {
                 className="card p-6 shadow-md hover:shadow-xl transition-all duration-300 group"
               >
                 {post.imageUrl && (
-                  <div className="relative mb-4 rounded-lg overflow-hidden">
+                  <div className="relative mb-4 rounded-lg overflow-hidden flex justify-center items-center">
                     {post.imageUrl.includes('<blockquote class="imgur-embed-pub"') ? (
                       <div 
-                        className="imgur-embed-container"
+                        className="imgur-embed-container w-full flex justify-center"
                         style={{ minHeight: '200px', maxHeight: '300px', overflow: 'hidden' }}
                         dangerouslySetInnerHTML={{ 
                           __html: post.imageUrl.replace(
@@ -122,7 +122,7 @@ export default function NewsPage() {
                         }} 
                       />
                     ) : (
-                      <div className="relative h-48 bg-gray-200">
+                      <div className="relative h-48 bg-gray-200 w-full flex justify-center items-center">
                         <img
                           src={post.imageUrl}
                           alt={post.title}

@@ -103,6 +103,22 @@
     background: rgb(245, 158, 11);
     opacity: 0.3;
   }
+
+  /* Center Imgur embeds */
+  .imgur-embed-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .imgur-embed-container blockquote {
+    margin: 0 auto !important;
+  }
+
+  .imgur-embed-container iframe {
+    margin: 0 auto !important;
+    display: block !important;
+  }
 }
 
 @layer utilities {
