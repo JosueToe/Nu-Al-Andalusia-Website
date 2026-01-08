@@ -70,22 +70,28 @@ export default function NewsPage() {
                 className="card p-6 shadow-md hover:shadow-xl transition-all duration-300 group"
               >
                 {post.imageUrl && (
-                  <div className="relative h-48 mb-4 rounded-lg overflow-hidden bg-gray-200">
-                    <img
-                      src={post.imageUrl}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      crossOrigin="anonymous"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        console.error("Image failed to load:", post.imageUrl);
-                        target.style.display = 'none';
-                        const parent = target.parentElement;
-                        if (parent) {
-                          parent.innerHTML = '<div class="w-full h-full flex items-center justify-center text-gray-400 text-sm">Image not available</div>';
-                        }
-                      }}
-                    />
+                  <div className="relative mb-4 rounded-lg overflow-hidden">
+                    {post.imageUrl.includes('<blockquote class="imgur-embed-pub"') ? (
+                      <div className="imgur-embed-container" dangerouslySetInnerHTML={{ __html: post.imageUrl }} />
+                    ) : (
+                      <div className="relative h-48 bg-gray-200">
+                        <img
+                          src={post.imageUrl}
+                          alt={post.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          crossOrigin="anonymous"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            console.error("Image failed to load:", post.imageUrl);
+                            target.style.display = 'none';
+                            const parent = target.parentElement;
+                            if (parent) {
+                              parent.innerHTML = '<div class="w-full h-full flex items-center justify-center text-gray-400 text-sm">Image not available</div>';
+                            }
+                          }}
+                        />
+                      </div>
+                    )}
                   </div>
                 )}
                 <h2 className="text-xl font-heading font-bold text-navy-blue mb-3 group-hover:text-deep-teal transition-colors line-clamp-2">

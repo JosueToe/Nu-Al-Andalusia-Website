@@ -163,62 +163,69 @@ export default function NewsEditor({ post }: { post?: NewsPost }) {
               htmlFor="imageUrl"
               className="block text-sm font-semibold text-navy-blue mb-2"
             >
-              Image URL (optional)
+              Image URL or Imgur Embed Code (optional)
             </label>
-            <input
-              type="url"
+            <textarea
               id="imageUrl"
               name="imageUrl"
               value={formData.imageUrl}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-deep-teal focus:outline-none transition-colors"
-              placeholder="https://i.imgur.com/xxxxx.jpg"
+              rows={4}
+              className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-deep-teal focus:outline-none transition-colors font-mono text-sm"
+              placeholder="Paste image URL (https://i.imgur.com/xxxxx.jpg) or Imgur embed code"
             />
             <p className="text-xs text-warm-gray mt-2">
-              Paste an image URL from Imgur, Cloudinary, or any image hosting service
+              You can use either:
             </p>
-            <div className="text-xs text-amber-600 mt-1 p-2 bg-amber-50 rounded border border-amber-200">
-              <p className="font-semibold mb-1">⚠️ Important for Imgur:</p>
-              <p className="mb-1">❌ <strong>Don't use:</strong> Gallery links (imgur.com/a/xxxxx)</p>
-              <p className="mb-1">✅ <strong>Use instead:</strong> Direct image link</p>
-              <p className="text-xs mt-1">To get the direct link:</p>
-              <ol className="list-decimal list-inside ml-2 mt-1 space-y-1">
-                <li>Open your Imgur gallery</li>
-                <li>Click on the image to view it</li>
-                <li>Right-click the image → "Copy image address"</li>
-                <li>Paste that URL here (should look like: i.imgur.com/xxxxx.jpg)</li>
-              </ol>
+            <ul className="text-xs text-warm-gray mt-1 list-disc list-inside space-y-1">
+              <li>Direct image URL (e.g., https://i.imgur.com/xxxxx.jpg)</li>
+              <li>Imgur embed code (from the "Embed" button on Imgur)</li>
+            </ul>
+            <div className="text-xs text-blue-600 mt-2 p-2 bg-blue-50 rounded border border-blue-200">
+              <p className="font-semibold mb-1">💡 For Imgur Galleries:</p>
+              <p className="mb-1">1. Go to your Imgur gallery/image</p>
+              <p className="mb-1">2. Click the "Embed" button (or "Get share links")</p>
+              <p className="mb-1">3. Copy the embed code</p>
+              <p className="mb-1">4. Paste it here</p>
             </div>
             
-            {/* Image Preview */}
+            {/* Preview */}
             {formData.imageUrl && (
               <div className="mt-4">
                 <p className="text-xs font-semibold text-navy-blue mb-2">Preview:</p>
-                <div className="relative h-48 rounded-lg overflow-hidden border-2 border-gray-300 bg-gray-100">
-                  <img
-                    src={formData.imageUrl}
-                    alt="Preview"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const parent = target.parentElement;
-                      if (parent) {
-                        parent.innerHTML = `
-                          <div class="w-full h-full flex flex-col items-center justify-center text-red-500 p-4">
-                            <p class="mb-2 font-semibold">❌ Image failed to load</p>
-                            <p class="text-xs text-gray-600 break-all text-center">Check the URL format</p>
-                            <p class="text-xs text-gray-500 break-all text-center mt-2">${formData.imageUrl}</p>
-                          </div>
-                        `;
-                      }
-                    }}
-                    onLoad={() => {
-                      console.log("Preview image loaded successfully");
-                    }}
-                  />
+                <div className="relative min-h-48 rounded-lg overflow-hidden border-2 border-gray-300 bg-gray-100 p-4">
+                  {formData.imageUrl.includes('<blockquote class="imgur-embed-pub"') ? (
+                    <div>
+                      <div dangerouslySetInnerHTML={{ __html: formData.imageUrl }} />
+                      <p className="text-xs text-green-600 mt-2">✓ Embed code detected - will render on post</p>
+                    </div>
+                  ) : (
+                    <>
+                      <img
+                        src={formData.imageUrl}
+                        alt="Preview"
+                        className="w-full h-auto max-h-96 object-contain rounded"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent) {
+                            parent.innerHTML = `
+                              <div class="w-full h-full flex flex-col items-center justify-center text-red-500 p-4">
+                                <p class="mb-2 font-semibold">❌ Image failed to load</p>
+                                <p class="text-xs text-gray-600 break-all text-center">Check the URL format</p>
+                              </div>
+                            `;
+                          }
+                        }}
+                        onLoad={() => {
+                          console.log("Preview image loaded successfully");
+                        }}
+                      />
+                      <p className="text-xs text-green-600 mt-2">✓ If you see the image above, it will work on the post</p>
+                    </>
+                  )}
                 </div>
-                <p className="text-xs text-green-600 mt-1">✓ If you see the image above, it will work on the post</p>
               </div>
             )}
           </div>

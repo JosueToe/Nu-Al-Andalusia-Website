@@ -74,30 +74,36 @@ export default function NewsPostPage() {
         </Link>
 
         {post.imageUrl && (
-          <div className="relative h-96 mb-8 rounded-lg overflow-hidden bg-gray-200">
-            <img
-              src={post.imageUrl}
-              alt={post.title}
-              className="w-full h-full object-cover"
-              crossOrigin="anonymous"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                console.error("Image failed to load:", post.imageUrl);
-                target.style.display = 'none';
-                const parent = target.parentElement;
-                if (parent) {
-                  parent.innerHTML = `
-                    <div class="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
-                      <p class="mb-2">Image not available</p>
-                      <p class="text-xs text-gray-500 break-all text-center">URL: ${post.imageUrl}</p>
-                    </div>
-                  `;
-                }
-              }}
-              onLoad={() => {
-                console.log("Image loaded successfully:", post.imageUrl);
-              }}
-            />
+          <div className="relative mb-8 rounded-lg overflow-hidden">
+            {post.imageUrl.includes('<blockquote class="imgur-embed-pub"') ? (
+              <div className="imgur-embed-container" dangerouslySetInnerHTML={{ __html: post.imageUrl }} />
+            ) : (
+              <div className="relative h-96 bg-gray-200">
+                <img
+                  src={post.imageUrl}
+                  alt={post.title}
+                  className="w-full h-full object-cover"
+                  crossOrigin="anonymous"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    console.error("Image failed to load:", post.imageUrl);
+                    target.style.display = 'none';
+                    const parent = target.parentElement;
+                    if (parent) {
+                      parent.innerHTML = `
+                        <div class="w-full h-full flex flex-col items-center justify-center text-gray-400 p-4">
+                          <p class="mb-2">Image not available</p>
+                          <p class="text-xs text-gray-500 break-all text-center">URL: ${post.imageUrl}</p>
+                        </div>
+                      `;
+                    }
+                  }}
+                  onLoad={() => {
+                    console.log("Image loaded successfully:", post.imageUrl);
+                  }}
+                />
+              </div>
+            )}
           </div>
         )}
 

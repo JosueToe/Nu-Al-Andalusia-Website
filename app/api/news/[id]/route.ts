@@ -44,17 +44,19 @@ export async function PUT(
     const store = getStore(STORE_NAME);
     const body = await request.json();
     
-    // Clean and validate image URL (same logic as POST)
+    // Clean and validate image URL or embed code (same logic as POST)
     let imageUrl = (body.imageUrl || "").trim();
     
-    // Handle Imgur URLs
-    if (imageUrl && imageUrl.includes("imgur.com")) {
-      // Gallery links (imgur.com/a/...) cannot be used as image sources
+    // If it's an embed code, store it as-is
+    if (imageUrl.includes('<blockquote class="imgur-embed-pub"')) {
+      // Embed code - store as-is, no validation needed
+    } else if (imageUrl && imageUrl.includes("imgur.com")) {
+      // Handle regular Imgur URLs
       if (imageUrl.includes("/a/") || imageUrl.includes("/gallery/")) {
-        // Return error for gallery links
+        // Gallery links - suggest using embed code instead
         return NextResponse.json(
           { 
-            error: "Gallery links are not supported. Please use a direct image link. Right-click the image in the gallery and select 'Copy image address' to get the direct link (i.imgur.com/xxxxx.jpg)." 
+            error: "Gallery links are not supported as direct image URLs. Please use the Imgur embed code instead. Click 'Embed' on your Imgur gallery/image and paste the embed code here." 
           },
           { status: 400 }
         );
