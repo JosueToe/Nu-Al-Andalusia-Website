@@ -73,7 +73,7 @@ export default function OurImpact() {
             <div className="card p-6">
               <h4 className="text-h4 mb-3 text-deep-teal">Community Services Expansion</h4>
               <p className="text-warm-gray mb-4">
-                We've expanded our service offerings to include consulting, project management, and technology solutions, serving over 200 organizations and individuals in the past year.
+                We&apos;ve expanded our service offerings to include consulting, project management, and technology solutions, serving over 200 organizations and individuals in the past year.
               </p>
               <div className="text-sm text-deep-teal font-semibold">200+ Clients Served</div>
             </div>
