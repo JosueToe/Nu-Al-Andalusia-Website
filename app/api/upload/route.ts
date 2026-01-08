@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { writeFile, mkdir } from "fs/promises";
-import { join } from "path";
-import { existsSync } from "fs";
 
 export async function POST(request: NextRequest) {
   try {
@@ -37,31 +34,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create uploads directory if it doesn't exist
-    const uploadsDir = join(process.cwd(), "public", "uploads");
-    if (!existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true });
-    }
-
-    // Generate unique filename
-    const timestamp = Date.now();
-    const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9.-]/g, "_");
-    const fileName = `${timestamp}-${sanitizedFileName}`;
-    const filePath = join(uploadsDir, fileName);
-
-    // Convert file to buffer and save
+    // Convert file to base64 for storage
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    await writeFile(filePath, buffer);
+    const base64 = buffer.toString("base64");
+    const dataUrl = `data:${file.type};base64,${base64}`;
 
-    // Return the public URL
-    const publicUrl = `/uploads/${fileName}`;
-
-    return NextResponse.json({ url: publicUrl }, { status: 200 });
+    // Return the data URL (client can use this directly or upload to cloud storage)
+    // Note: For production, consider using cloud storage (AWS S3, Cloudinary, etc.)
+    return NextResponse.json({ 
+      url: dataUrl,
+      message: "Image uploaded as base64. For production, use cloud storage like Cloudinary or AWS S3."
+    }, { status: 200 });
   } catch (error) {
     console.error("Error uploading file:", error);
     return NextResponse.json(
-      { error: "Failed to upload file" },
+      { error: "Failed to upload file. Please use an image URL instead, or set up cloud storage." },
       { status: 500 }
     );
   }

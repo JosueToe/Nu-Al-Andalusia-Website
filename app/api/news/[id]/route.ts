@@ -1,20 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import fs from "fs";
-import path from "path";
+import { getStore } from "@netlify/blobs";
 
-const dataFilePath = path.join(process.cwd(), "data", "news.json");
-
-function ensureDataDirectory() {
-  const dataDir = path.join(process.cwd(), "data");
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
-  }
-  if (!fs.existsSync(dataFilePath)) {
-    fs.writeFileSync(dataFilePath, JSON.stringify([]));
-  }
-}
+const STORE_NAME = "news-posts";
 
 // GET - Fetch single news post
 export async function GET(
@@ -22,9 +11,9 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    ensureDataDirectory();
-    const fileContents = fs.readFileSync(dataFilePath, "utf8");
-    const posts = JSON.parse(fileContents || "[]");
+    const store = getStore(STORE_NAME);
+    const data = await store.get("posts", { type: "json" });
+    const posts = data || [];
     const post = posts.find((p: any) => p.id === params.id);
     
     if (!post) {
@@ -52,11 +41,11 @@ export async function PUT(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    ensureDataDirectory();
+    const store = getStore(STORE_NAME);
     const body = await request.json();
     
-    const fileContents = fs.readFileSync(dataFilePath, "utf8");
-    const posts = JSON.parse(fileContents || "[]");
+    const data = await store.get("posts", { type: "json" });
+    const posts = data || [];
     
     const index = posts.findIndex((p: any) => p.id === params.id);
     if (index === -1) {
@@ -69,7 +58,7 @@ export async function PUT(
       updatedAt: new Date().toISOString(),
     };
     
-    fs.writeFileSync(dataFilePath, JSON.stringify(posts, null, 2));
+    await store.set("posts", JSON.stringify(posts));
     
     return NextResponse.json(posts[index]);
   } catch (error) {
@@ -92,9 +81,9 @@ export async function DELETE(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    ensureDataDirectory();
-    const fileContents = fs.readFileSync(dataFilePath, "utf8");
-    const posts = JSON.parse(fileContents || "[]");
+    const store = getStore(STORE_NAME);
+    const data = await store.get("posts", { type: "json" });
+    const posts = data || [];
     
     const filteredPosts = posts.filter((p: any) => p.id !== params.id);
     
@@ -102,7 +91,7 @@ export async function DELETE(
       return NextResponse.json({ error: "Post not found" }, { status: 404 });
     }
     
-    fs.writeFileSync(dataFilePath, JSON.stringify(filteredPosts, null, 2));
+    await store.set("posts", JSON.stringify(filteredPosts));
     
     return NextResponse.json({ success: true });
   } catch (error) {

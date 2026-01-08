@@ -3,7 +3,6 @@
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Save, X, Loader2 } from "lucide-react";
-import ImageUpload from "./ImageUpload";
 
 interface NewsPost {
   id?: string;
@@ -158,12 +157,26 @@ export default function NewsEditor({ post }: { post?: NewsPost }) {
           />
         </div>
 
-        <div>
-          <ImageUpload
-            value={formData.imageUrl}
-            onChange={(url) => setFormData({ ...formData, imageUrl: url })}
-          />
-        </div>
+          <div>
+            <label
+              htmlFor="imageUrl"
+              className="block text-sm font-semibold text-navy-blue mb-2"
+            >
+              Image URL (optional)
+            </label>
+            <input
+              type="url"
+              id="imageUrl"
+              name="imageUrl"
+              value={formData.imageUrl}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-deep-teal focus:outline-none transition-colors"
+              placeholder="https://example.com/image.jpg"
+            />
+            <p className="text-xs text-warm-gray mt-2">
+              Paste an image URL from Imgur, Cloudinary, or any image hosting service
+            </p>
+          </div>
 
         <div className="flex items-center space-x-2">
           <input

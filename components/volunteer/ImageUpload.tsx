@@ -57,6 +57,8 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
       const data = await response.json();
       
       // Update preview and value
+      // If it's a base64 data URL, use it directly
+      // Otherwise use the URL
       setPreview(data.url);
       onChange(data.url);
     } catch (err: any) {

@@ -1,28 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import fs from "fs";
-import path from "path";
+import { getStore } from "@netlify/blobs";
 
-const dataFilePath = path.join(process.cwd(), "data", "news.json");
-
-// Ensure data directory exists
-function ensureDataDirectory() {
-  const dataDir = path.join(process.cwd(), "data");
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
-  }
-  if (!fs.existsSync(dataFilePath)) {
-    fs.writeFileSync(dataFilePath, JSON.stringify([]));
-  }
-}
+const STORE_NAME = "news-posts";
 
 // GET - Fetch all news posts
 export async function GET() {
   try {
-    ensureDataDirectory();
-    const fileContents = fs.readFileSync(dataFilePath, "utf8");
-    const posts = JSON.parse(fileContents || "[]");
+    const store = getStore(STORE_NAME);
+    const data = await store.get("posts", { type: "json" });
+    const posts = data || [];
     
     // Sort by published date (newest first)
     const sortedPosts = posts.sort(
@@ -45,11 +33,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    ensureDataDirectory();
+    const store = getStore(STORE_NAME);
     const body = await request.json();
     
-    const fileContents = fs.readFileSync(dataFilePath, "utf8");
-    const posts = JSON.parse(fileContents || "[]");
+    const data = await store.get("posts", { type: "json" });
+    const posts = data || [];
     
     const newPost = {
       id: Date.now().toString(),
@@ -64,7 +52,7 @@ export async function POST(request: NextRequest) {
     };
     
     posts.push(newPost);
-    fs.writeFileSync(dataFilePath, JSON.stringify(posts, null, 2));
+    await store.set("posts", JSON.stringify(posts));
     
     return NextResponse.json(newPost, { status: 201 });
   } catch (error) {
