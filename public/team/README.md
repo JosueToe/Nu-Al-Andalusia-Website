@@ -9,3 +9,4 @@ Place the 4 staff images in this folder with the following filenames:
 
 Supported formats: .jpg, .jpeg, .png, .webp
 
+

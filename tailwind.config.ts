@@ -24,6 +24,10 @@ const config: Config = {
         // Additional Modern Colors
         "slate-light": "#F1F5F9",
         "slate-dark": "#0F172A",
+        // Hero / History banner (flag palette)
+        "forest-green": "#14532d",
+        "maroon": "#722F37",
+        "hero-gold": "#C9A961",
       },
       fontFamily: {
         heading: ["Playfair Display", "serif"],

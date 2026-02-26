@@ -45,3 +45,4 @@ The team images will be displayed in:
 - Homepage "Our Team" section
 - Any other pages that reference the team component
 
+

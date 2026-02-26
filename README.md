@@ -112,3 +112,4 @@ NEXTAUTH_SECRET=your_secret_key
 
 Copyright © 2026 Nu Al Andalusia - All Rights Reserved.
 
+

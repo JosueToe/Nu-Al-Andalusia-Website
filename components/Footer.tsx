@@ -4,6 +4,7 @@ import { Star, Facebook, Instagram, Twitter, Linkedin, Mail, MapPin } from "luci
 export default function Footer() {
   const quickLinks = [
     { href: "/#about", label: "About Us" },
+    { href: "/history", label: "History" },
     { href: "/#vision", label: "Our Vision" },
     { href: "/#services", label: "Services" },
     { href: "/#community", label: "Community" },
@@ -20,6 +21,7 @@ export default function Footer() {
 
   const essentialLinks = [
     { href: "/", label: "Home" },
+    { href: "/history", label: "History" },
     { href: "/news", label: "News & Updates" },
     { href: "/contact", label: "Contact" },
   ];

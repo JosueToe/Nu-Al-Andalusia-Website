@@ -42,3 +42,4 @@ If images are not found, the system will use:
 - Logo: Current star icon
 - Favicon: Default Next.js favicon
 
+
