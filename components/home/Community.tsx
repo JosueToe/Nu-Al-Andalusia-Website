@@ -2,6 +2,41 @@
 
 import Link from "next/link";
 import { Users, Calendar, Heart, Handshake } from "lucide-react";
+import { useEffect, useState } from "react";
+
+function FadingImageBackground({
+  images,
+  interval = 5000,
+}: {
+  images: string[];
+  interval?: number;
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (!images || images.length <= 1) return;
+
+    const id = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % images.length);
+    }, interval);
+
+    return () => clearInterval(id);
+  }, [images, interval]);
+
+  return (
+    <div className="absolute inset-0">
+      {images.map((src, index) => (
+        <div
+          key={`${src}-${index}`}
+          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+            index === activeIndex ? "opacity-100" : "opacity-0"
+          }`}
+          style={{ backgroundImage: `url(${src})` }}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default function Community() {
   const programs = [
@@ -26,8 +61,13 @@ export default function Community() {
     {
       icon: Handshake,
       title: "Partnerships",
-      description: "Collaborative efforts with other organizations to amplify our impact and serve more community members.",
-      image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80",
+      description:
+        "Collaborative efforts with other organizations to amplify our impact and serve more community members.",
+      images: [
+        "/partnerships-1.png",
+        "/partnerships-2.png",
+        "/partnerships-3.png",
+      ],
     },
   ];
 
@@ -51,10 +91,18 @@ export default function Community() {
                 className="card overflow-hidden group"
               >
                 <div className="relative h-48 overflow-hidden">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                    style={{ backgroundImage: `url(${program.image})` }}
-                  />
+                  <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-110">
+                    {"images" in program && (program as any).images ? (
+                      <FadingImageBackground
+                        images={(program as any).images as string[]}
+                      />
+                    ) : (
+                      <div
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: `url(${(program as any).image})` }}
+                      />
+                    )}
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-800/50 to-slate-800/40" />
                   <div className="absolute inset-0 bg-black/15" />
                   <div className="absolute top-4 left-4 z-10">
