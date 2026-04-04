@@ -44,7 +44,12 @@ export default function Community() {
       icon: Users,
       title: "Community Gatherings",
       description: "Regular events that bring our community together to celebrate heritage, share stories, and build lasting connections.",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
+      images: [
+        "/community-gatherings-1.jpeg",
+        "/community-gatherings-2.jpg",
+        "/community-gatherings-3.jpeg",
+        "/community-gatherings-4.jpg",
+      ],
     },
     {
       icon: Calendar,
